@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store </title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <div class="container nav-wrapper">
+            <div class="brand">
+                <i class='bx bxs-book-heart'></i>
+                <span>Book<strong>Store</strong></span>
+            </div>
+            <div class="cart-trigger" onclick="toggleCart()">
+                <i class='bx bx-shopping-bag'></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="shop-header">
+        <div class="container">
+            <span class="badge">E-commerce Portfolio Project</span>
+            <h1>A sua próxima grande <strong>aventura</strong> começa aqui.</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="book-grid" id="book-grid"></div>
+    </main>
+
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-inner">
+            <div class="cart-header">
+                <h2>O seu Carrinho</h2>
+                <button class="close-cart" onclick="toggleCart()">&times;</button>
+            </div>
+            <div id="cart-items" class="cart-items-list"></div>
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span id="cart-total">0.00€</span>
+                </div>
+                <button class="btn-checkout" onclick="openPayment()">Finalizar Compra</button>
+            </div>
+        </div>
+    </aside>
+
+    <div class="payment-modal" id="payment-modal">
+        <div class="payment-card">
+            <button class="close-modal" onclick="closePayment()">&times;</button>
+            
+            <div class="payment-tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'card')"><i class='bx bx-credit-card'></i> Cartão</button>
+                <button class="tab-btn" onclick="switchTab(event, 'mbway')"><i class='bx bx-mobile-alt'></i> MB WAY</button>
+                <button class="tab-btn" onclick="switchTab(event, 'mb')"><i class='bx bx-barcode'></i> Multibanco</button>
+            </div>
+
+            <div id="pay-amount-display">Total a pagar: <span id="pay-amount">0.00€</span></div>
+
+            <div id="payment-card-content" class="tab-content active">
+                <form onsubmit="processPayment(event, 'Cartão')">
+                    <div class="input-group">
+                        <label>E-mail</label>
+                        <input type="email" placeholder="exemplo@email.com" required>
+                    </div>
+                    <div class="card-input-wrapper">
+                        <input type="text" placeholder="Número do Cartão" required>
+                        <div class="card-extra">
+                            <input type="text" placeholder="MM/AA" required>
+                            <input type="text" placeholder="CVC" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-pay">Pagar com Cartão</button>
+                </form>
+            </div>
+
+            <div id="payment-mbway-content" class="tab-content">
+                <div class="method-info">Receberá uma notificação na sua App MB WAY.</div>
+                <form onsubmit="processPayment(event, 'MB WAY')">
+                    <div class="input-group">
+                        <label>Telemóvel</label>
+                        <input type="tel" placeholder="912 345 678" required>
+                    </div>
+                    <button type="submit" class="btn-pay btn-mbway">Confirmar MB WAY</button>
+                </form>
+            </div>
+
+            <div id="payment-mb-content" class="tab-content">
+                <div class="method-info">A referência será gerada após a confirmação.</div>
+                <form onsubmit="processPayment(event, 'Multibanco')">
+                    <button type="submit" class="btn-pay btn-mb">Gerar Referência</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <script src="script.js"></script>
+</body>
+</html>
